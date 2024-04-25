@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.boardver2.board.BoardMapper">    <!-- 인터페이스 파일 주소.인터페이스 파일 명-->
+
+    <insert id="postBoard">
+        INSERT INTO board
+        SET title = #{title}
+        , contents = #{contents}
+        , writer_id = #{writerId}
+    </insert>
+
+    <select id="getBoard">
+        SELECT board_id AS boardId, title, contents, writer_id AS writerId, hits
+        FROM board
+        WHERE board_id = #{boardId}
+    </select>
+    
+    <delete id="deleteBoard">
+        DELETE FROM board
+        WHERE board_id = #{boardId}
+    </delete>
+
+    <update id="putUpdate">
+        SELECT board
+        SET title = #{title}
+            contents = #{contents}
+    </update>
+
+
+</mapper>
+

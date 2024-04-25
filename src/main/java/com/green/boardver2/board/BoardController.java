@@ -2,8 +2,10 @@ package com.green.boardver2.board;
 
 import com.green.boardver2.board.model.BoardGetRes;
 import com.green.boardver2.board.model.BoardPostReq;
+import com.green.boardver2.board.model.BoardPutReq;
 import com.green.boardver2.common.ResultDto;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +43,10 @@ public class BoardController {
     @DeleteMapping
     public int deleteBoard(@RequestParam(name="board_id") int boardId) {
         return service.deleteBoard(boardId);
+    }
+
+    @PutMapping
+    public int putUpdate(@RequestBody BoardPutReq p) {
+        return service.putUpdate(p);
     }
 }

@@ -23,9 +23,11 @@
     </delete>
 
     <update id="putUpdate">
-        SELECT board
-        SET title = #{title}
+        UPDATE board
+        SET updated_at = NOW(),
+        title = #{title} ,
             contents = #{contents}
+        WHERE board_id = #{boardId}
     </update>
 
 

@@ -1,9 +1,8 @@
 package com.green.boardver2.board;
 
-import com.green.boardver2.board.model.BoardGetRes;
-import com.green.boardver2.board.model.BoardPostReq;
-import com.green.boardver2.board.model.BoardPutReq;
+import com.green.boardver2.board.model.*;
 import org.apache.ibatis.annotations.Mapper;
+import java.util.*;
 
 @Mapper
 public interface BoardMapper {
@@ -12,4 +11,10 @@ public interface BoardMapper {
     BoardGetRes getBoard(int boardId);
     int deleteBoard(int p);
     int putUpdate(BoardPutReq p);
+
+    BoardDetailGetRes getBoardOne(long boardId);
+
+    List<BoardGetRes> getBoardList(BoardGetReq p);
+
+    int patchBoardHits(long boardId);
 }

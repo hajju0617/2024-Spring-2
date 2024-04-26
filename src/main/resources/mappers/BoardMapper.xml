@@ -24,12 +24,41 @@
 
     <update id="putUpdate">
         UPDATE board
+        <set>
+
+        </set>
         SET updated_at = NOW(),
         title = #{title} ,
             contents = #{contents}
         WHERE board_id = #{boardId}
     </update>
+    
+    <select id="getBoardOne">
+        SELECT A.board_id AS boardId, A.title, A.contents
+        , A.writer_id AS writerId, B.nm AS writerNm
+        , A.hits, A.created_at AS createdAt
+        FROM board A
+        INNER JOIN user B
+        ON A.writer_id = B.user_id
+        WHERE A.board_id = #{boardId}
+    </select>
 
+    <select id="getBoardList">
+        SELECT A.board_id AS boardId, A.title
+        , A.writer_id AS writerId, B.nm AS writerNm
+        , A.hits, A.created_at AS createdAt
+        FROM board A
+        INNER JOIN user B
+        ON A.writer_id = B.user_id
+        ORDER BY A.board_id DESC
+        LIMIT #{startIdx}, #{len}
+    </select>
+
+    <update id="patchBoardHits">
+        UPDATE board
+        SET hits = hits + 1
+        WHERE board_id = #{boardId}
+    </update>
 
 </mapper>
 

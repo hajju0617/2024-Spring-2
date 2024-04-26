@@ -1,13 +1,12 @@
 package com.green.boardver2.board;
 
-import com.green.boardver2.board.model.BoardGetRes;
-import com.green.boardver2.board.model.BoardPostReq;
-import com.green.boardver2.board.model.BoardPutReq;
+import com.green.boardver2.board.model.*;
 import com.green.boardver2.common.ResultDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
 @RestController
 @RequestMapping("board")
@@ -48,5 +47,31 @@ public class BoardController {
     @PutMapping
     public int putUpdate(@RequestBody BoardPutReq p) {
         return service.putUpdate(p);
+    }
+
+    @GetMapping("{board_id}")
+    public ResultDto<BoardDetailGetRes> getBoardOne(@PathVariable(name = "board_id") long boardId) {
+        BoardDetailGetRes result = service.getBoardOne(boardId);
+
+        return ResultDto.<BoardDetailGetRes>builder()
+                .statusCode(HttpStatus.OK)
+                .resultMsg(result == null? "내용을 찾을 수 없습니다." : HttpStatus.OK.toString())
+                .resultData(result).build();
+        //builder()는 사용한 변수만 만들어줌 + 클래스명이 아닌 변수명으로 생성자 -> result를 받음
+    }
+
+    @GetMapping("SelectList")   // 중복된 GetMapping 구분
+    public ResultDto<List<BoardGetRes>> getBoardList(@RequestParam(name = "page") int page
+            , @RequestParam(name = "size", defaultValue = "10") int size) {
+        BoardGetReq p = new BoardGetReq();
+        p.setStartIdx((page - 1) * size);           // service 쪽에서 처리 해야 할 코드
+        p.setLen(size);
+
+        List<BoardGetRes> list = service.getBoardList(p);
+
+        return ResultDto.<List<BoardGetRes>>builder()
+                .statusCode(HttpStatus.OK)
+                .resultMsg(String.format("rowCount: %d", list.size()))
+                .resultData(list).build();
     }
 }

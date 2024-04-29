@@ -7,7 +7,7 @@ spring:
     username: root
     password: green502
 mybatis:
-  mapper-locations: mappers/**/*.xml
+  mapper-locations: mappers/**/*.xml    # resources 아래에 mappers 폴더이름
 
 springdoc:
   swagger-ui:

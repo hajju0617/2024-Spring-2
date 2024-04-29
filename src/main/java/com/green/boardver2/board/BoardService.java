@@ -16,12 +16,12 @@ public class BoardService {
     public BoardGetRes getBoard(int boardId) {
         return mapper.getBoard(boardId);
     }
-    public int deleteBoard(int boardId) {
+    public int deleteBoard(long boardId) {
         return mapper.deleteBoard(boardId);
     }
 
-    public int putUpdate(BoardPutReq p) {
-        return mapper.putUpdate(p);
+    public int putBoard(BoardPutReq p) {
+        return mapper.putBoard(p);
     }
     public BoardDetailGetRes getBoardOne(long boardId) {
         BoardDetailGetRes result = mapper.getBoardOne(boardId);

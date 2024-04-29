@@ -40,13 +40,17 @@ public class BoardController {
 //    }
 
     @DeleteMapping
-    public int deleteBoard(@RequestParam(name="board_id") int boardId) {
+    public int deleteBoard(@RequestParam(name="board_id") long boardId) {
         return service.deleteBoard(boardId);
     }
 
     @PutMapping
-    public int putUpdate(@RequestBody BoardPutReq p) {
-        return service.putUpdate(p);
+    public ResultDto<Integer> putBoard(@RequestBody BoardPutReq p) {
+        int result = service.putBoard(p);
+        return ResultDto.<Integer>builder()
+                .statusCode(HttpStatus.OK)
+                .resultMsg(HttpStatus.OK.toString())
+                .resultData(result).build();
     }
 
     @GetMapping("{board_id}")

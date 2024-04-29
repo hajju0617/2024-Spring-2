@@ -11,7 +11,6 @@
         , writer_id = #{writerId}
     </insert>
 
-
     <!-- 데이터베이스에서는 _(언더바)를 쓰지만 자바에서는 쓰지 않기 때문에 AS(Alias)가 중요-->
     <select id="getBoard">
         SELECT board_id AS boardId, title, contents, writer_id AS writerId, hits
@@ -24,14 +23,16 @@
         WHERE board_id = #{boardId}
     </delete>
 
-    <update id="putUpdate">
+    <update id="putBoard">
         UPDATE board
         <set>
-
+            <if test=" title != null and title != '' ">
+                title = #{title},
+            </if>
+            <if test=" contents != null and contents != '' ">
+                contents = #{contents},
+            </if>
         </set>
-        SET updated_at = NOW(),
-        title = #{title} ,
-            contents = #{contents}
         WHERE board_id = #{boardId}
     </update>
     

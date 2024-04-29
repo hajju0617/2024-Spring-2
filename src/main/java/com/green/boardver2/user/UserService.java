@@ -31,7 +31,7 @@ public class UserService {
         }
         return 3;
     }
-    // 1: 비밀번호 변경 성공, 2: 아이디를 확인해 주세요. 3:기존 비밀번호를 확인 해주세요
+        // 1: 비밀번호 변경 성공, 2: 아이디를 확인해 주세요. 3:기존 비밀번호를 확인 해주세요
     public int patchPassword(ChangePasswordPatchReq p) {
         // 현재 비밀번호
         System.out.println("유저가 입력한 값: " + p);

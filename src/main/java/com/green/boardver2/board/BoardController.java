@@ -8,14 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
-@RestController
+@RestController             //   ------> Bean 등록 + URL 맵핑 (간단하게 역할분담 지정) ===> /board가 들어오면 BoardController, /user가 들어오면 UserController
 @RequestMapping("board")
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService service;
 
     @PostMapping
-    public ResultDto<Integer> postBoard(@RequestBody BoardPostReq p) {
+    public ResultDto<Integer> postBoard(@RequestBody BoardPostReq p) {      // ResultDto<T>의 <T>가 <Integer> 타입으로 정해짐
         int result = service.postBoard(p);
 
         return ResultDto.<Integer>builder()
@@ -60,8 +60,8 @@ public class BoardController {
         //builder()는 사용한 변수만 만들어줌 + 클래스명이 아닌 변수명으로 생성자 -> result를 받음
     }
 
-    @GetMapping("SelectList")   // 중복된 GetMapping 구분
-    public ResultDto<List<BoardGetRes>> getBoardList(@RequestParam(name = "page") int page
+    @GetMapping("SelectList")   // ("SelectList") 적은 이유 -> 중복된 GetMapping 구분
+    public ResultDto<List<BoardGetRes>> getBoardList(@RequestParam(name = "page") int page      // ----> ResultDto<T>에서 T가 <List<BoardGetRes>> 해당 타입으로 정해짐
             , @RequestParam(name = "size", defaultValue = "10") int size) {
         BoardGetReq p = new BoardGetReq();
         p.setStartIdx((page - 1) * size);           // service 쪽에서 처리 해야 할 코드

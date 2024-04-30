@@ -70,9 +70,7 @@ public class BoardController {
         BoardGetReq p = new BoardGetReq();
         p.setStartIdx((page - 1) * size);           // service 쪽에서 처리 해야 할 코드
         p.setLen(size);
-
         List<BoardGetRes> list = service.getBoardList(p);
-
         return ResultDto.<List<BoardGetRes>>builder()
                 .statusCode(HttpStatus.OK)
                 .resultMsg(String.format("rowCount: %d", list.size()))

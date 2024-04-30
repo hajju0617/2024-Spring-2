@@ -26,7 +26,7 @@ public class BoardService {
     public BoardDetailGetRes getBoardOne(long boardId) {
         BoardDetailGetRes result = mapper.getBoardOne(boardId);
         if(result != null) {
-            // Record가 있다면 조회수 +1
+            // Record 가 있다면 조회수 +1
             mapper.patchBoardHits(boardId);
         }
         return result;
